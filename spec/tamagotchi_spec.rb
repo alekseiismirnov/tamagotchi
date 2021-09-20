@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'tamagotchi'
 # from the task
 describe(Tamagotchi) do
