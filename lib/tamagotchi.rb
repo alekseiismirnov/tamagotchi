@@ -20,6 +20,10 @@ class Tamagotchi
     @last_id = 0
   end
 
+  def self.all
+    @my_objects.values
+  end
+
   def initialize(name)
     @name = name
 
@@ -42,5 +46,12 @@ class Tamagotchi
 
   def time_passes
     @food_level -= 1
+  end
+
+  def to_json(*_args)
+    {
+      id: id,
+      name: name
+    }
   end
 end

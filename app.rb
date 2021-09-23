@@ -9,5 +9,7 @@ also_reload 'lib/**/*.rb'
 require_relative 'lib/tamagotchi'
 
 get '/tamagotchis' do
+  @tamagotchis = Tamagotchi.all.map(&:to_json)
+  
   erb :tamagotchis
 end

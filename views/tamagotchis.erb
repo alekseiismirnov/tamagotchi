@@ -1,3 +1,11 @@
 <div class='tamagotchis_list'>
-  There is no tamagotchi here
+  <% if @tamagotchis.empty? %>
+    There is no tamagotchi here
+  <% else %>
+  <% @tamagotchis.each do |record| %>
+      <div class="tamagotchi">
+        <%= record[:name] %> 
+      </div>
+    <% end %>
+  <% end %>
 </div>
