@@ -2,3 +2,7 @@
 <div class="food">Food level: <%= @tamagotchi[:food_level] %></div>
 <div class="sleep">Sleep level: <%= @tamagotchi[:sleep_level] %></div>
 <div class="activity">Activity level: <%= @tamagotchi[:activity_level] %></div>
+<form>
+  <button formaction="/tamagotchis/<%= @id %>/play">play</button>
+  <button formaction="/tamagotchis/<%= @id %>/sleep">sleep</button>
+</form>

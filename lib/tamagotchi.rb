@@ -27,7 +27,7 @@ class Tamagotchi
   def self.find(id)
     @my_objects[id]
   end
-  
+
   def initialize(name)
     @name = name
 
@@ -60,5 +60,23 @@ class Tamagotchi
       sleep_level: sleep_level,
       activity_level: activity_level
     }
+  end
+
+  def play
+    @food_level -= 1
+    @sleep_level -= 1
+    @activity_level += 1
+  end
+
+  def eat
+    @food_level += 1
+    @sleep_level -= 1
+    @activity_level -= 1
+  end
+
+  def sleep
+    @food_level -= 1
+    @sleep_level += 1
+    @activity_level -= 1
   end
 end

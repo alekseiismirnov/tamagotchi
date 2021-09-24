@@ -15,32 +15,42 @@ describe('Tamagotchi', type: :feature) do
 
     @names = %w[Kenny Apple Lifetime]
     @pets = @names.map { |name| { name => Tamagotchi.new(name) } }
+
+    visit '/tamagotchis'
+    click_on 'Apple'
+    expect(status_code).to eq 200
   end
 
   it 'sleeps' do
-    # we seletct tamagotchi and do nothing
-    2.times do
-      visit '/tamagotchis'
-      click_on 'Apple'
-      expect(status_code).to eq 200
-    end
-    # level of sleep increases
     expect(find('div.sleep')).to have_content '10'
-    # level of activity decrease
     expect(find('div.activity')).to have_content '10'
-    # level of food decrease
     expect(find('div.food')).to have_content '10'
   end
 
   it 'plays' do
-    # level of activity increase
-    # level of sleep decrease
-    # level of food decreas
+    click_button 'play'
+    expect(status_code).to eq 200
+
+    expect(find('div.sleep')).to have_content '9'
+    expect(find('div.activity')).to have_content '11'
+    expect(find('div.food')).to have_content '9'
   end
 
   it 'eats' do
-    # level of food increase
-    # level of sleep decrease
-    # level of activity decrease
+    click_button 'eat'
+    expect(status_code).to eq 200
+
+    expect(find('div.sleep')).to have_content '9'
+    expect(find('div.activity')).to have_content '9'
+    expect(find('div.food')).to have_content '11'
+  end
+
+  it 'sleeps' do
+    click_button 'sleep'
+    expect(status_code).to eq 200
+
+    expect(find('div.sleep')).to have_content '11'
+    expect(find('div.activity')).to have_content '9'
+    expect(find('div.food')).to have_content '9'
   end
 end
