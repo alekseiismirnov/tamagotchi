@@ -9,32 +9,38 @@ set(show_exception: false)
 
 Capybara.save_path = '~/tmp'
 
-describe('Tamagotchis list', type: :feature) do
-  context 'if there is no one' do
-    it 'displays `nobody here` sight' do
-      Tamagotchi.clear
-      visit '/tamagotchis'
+describe('Tamagotchi', type: :feature) do
+  before :each do
+    Tamagotchi.clear
 
-      within('.tamagotchis_list') do
-        expect(page).to have_content 'There is no tamagotchi here' 
-      end
-    end
+    @names = %w[Kenny Apple Lifetime]
+    @pets = @names.map { |name| { name => Tamagotchi.new(name) } }
   end
 
-  context 'there are some' do
-    before :all do
-      Tamagotchi.clear
-      @names = %w[Nobody Whatever Noway]
-      @tamagotchis = @names.map { |name| Tamagotchi.new(name) }
+  it 'sleeps' do
+    # we seletct tamagotchi and do nothing
+    2.times do
       visit '/tamagotchis'
+      click_on 'Apple'
+      expect(status_code).to eq 200
     end
+    # level of sleep increases
+    expect(find('div.sleep')).to have_content '10'
+    # level of activity decrease
+    expect(find('div.activity')).to have_content '10'
+    # level of food decrease
+    expect(find('div.food')).to have_content '10'
+  end
 
-    it 'there are names in list' do
-      within('.tamagotchis_list') do
-        names_from_view = all('div', class: 'tamagotchi').map(&:text)
-        
-        expect(names_from_view).to match_array @names
-      end
-    end
+  it 'plays' do
+    # level of activity increase
+    # level of sleep decrease
+    # level of food decreas
+  end
+
+  it 'eats' do
+    # level of food increase
+    # level of sleep decrease
+    # level of activity decrease
   end
 end

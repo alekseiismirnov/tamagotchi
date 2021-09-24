@@ -4,7 +4,9 @@
   <% else %>
   <% @tamagotchis.each do |record| %>
       <div class="tamagotchi">
-        <%= record[:name] %> 
+        <a href="/tamagotchis/<%= record[:id] %>">
+          <%= record[:name] %>
+        </a>
       </div>
     <% end %>
   <% end %>

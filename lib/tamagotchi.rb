@@ -24,6 +24,10 @@ class Tamagotchi
     @my_objects.values
   end
 
+  def self.find(id)
+    @my_objects[id]
+  end
+  
   def initialize(name)
     @name = name
 
@@ -51,7 +55,10 @@ class Tamagotchi
   def to_json(*_args)
     {
       id: id,
-      name: name
+      name: name,
+      food_level: food_level,
+      sleep_level: sleep_level,
+      activity_level: activity_level
     }
   end
 end
